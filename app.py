@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-from gettingdata import 
-
 """
 Sets a Flask web application
 """
 from flask import Flask
+from functions.gettingdata import userDataSkills
 
 app = Flask(__name__)
 
 
-@app.route('/', strict=slashes=False)
+@app.route('/', strict_slashes=False)
 def index():
     """
     Returns the index page
@@ -17,9 +16,15 @@ def index():
     return 'Hi there! The index route is working!'
 
 
-@route('/people/:username')
-def sear    chingforsomeone:
+@app.route('/people/<username>')
+def searchingforsomeone(username):
     """ 
     This module gets info for a fiven username
     """
-        
+    public_Id = username
+    usuario = userDataSkills(public_Id=username) 
+    return(usuario)
+ 
+
+
+app.run(host='0.0.0.0', port='5000')
