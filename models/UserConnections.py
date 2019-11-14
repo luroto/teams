@@ -2,7 +2,6 @@
 """
 This sets all the attributes for the UserConnections class
 """
-from '../gettingdata.py' import UserData
 
 
 class UserConnections:
@@ -23,4 +22,4 @@ class UserConnections:
         initialUsernameData['data'] = UserData(self.username)
         initialUsernameData['candidates'] = self.candidates
         final_list = [initial_member, data, candidates]
-        return (final_list)
+        return (str(final_list))

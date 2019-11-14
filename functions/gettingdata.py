@@ -6,35 +6,33 @@ import requests
 from models import UserData
 from flask import jsonify
 
-def userDataSkills(*args, **kwargs):
+def userDataSkills(**dictionary):
     """
     This function gets all about a username as initial member of a team
     """
-    public_Id = kwargs['public_Id']
+    public_Id = dictionary['public_Id']
     urlforuser = "https://bio.torre.co/api/bios/" + public_Id
-    initialperson_strengths = []
-    fullname = []
-    professionalHeadline = []
+    fullname = ""
+    professionalHeadline = ""
     skills = []
+    user_data = requests
     try:
         user_data = requests.get(urlforuser)
+        user_data.encoding = 'utf-8'
     except user_data.RequestException as errorcillo:
         return(errorcillo)
-    print(user_data.status_code)
-    if user_data.status_code > 200 and user_data.status_code < 400:
+    if user_data.status_code >= 200 and user_data.status_code <= 400:
         user_data = user_data.json()
         public_Id = user_data['person']['publicId']
         fullname = user_data['person']['name']
         professionalHeadline = user_data['person']['professionalHeadline']
         skills = []
-        initialperson_strengths = user_data['person']['strengths'].json()
-    for strength in initialperson_strengths:
-        dir(strength)
-        skills.append({'skill_name': strength.name,
-                      'skill_code': strength.code,
-                       'weight': strength.weight})
-    usuario = UserData(public_Id=public_Id, fullname=fullname, professionalHeadline=professionalHeadline, argumntos=jsonify(skills))
-    return (usuario)
+        for strength in user_data['strengths']:
+            skills.append({'skill_name': strength['name'],
+                        'skill_code': strength['code'],
+                        'weight': strength['weight']})
+            dictio = {'public_Id': public_Id, 'fullname': fullname, 'professionalHeadline': professionalHeadline, 'skills': skills}
+    return (dictio)
 
 
 def ConnectingUser(*args, **kwargs):
