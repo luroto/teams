@@ -14,6 +14,8 @@ class UserData:
             self.fullname = kwargs['fullname']
             self.professionalHeadline = kwargs['professionalHeadline']
             self.skills = kwargs['skills']
+            if 'photo_url' in kwargs:
+                self.photo_url = kwargs['photo_url']
         else:
             self.public_Id = ""
             self.fullname = ""
@@ -22,8 +24,16 @@ class UserData:
    
     def __str__(self):
         """ Setting how the userdata will print"""
-        return ("{{ '{}': '{}', '{}': '{}', '{}': '{}', {}: {} }}".format('public_Id', self.public_Id, 'fullname', self.fullname, 'professionalHeadline', self.professionalHeadline, 'skills', self.skills))
-
+        if self.photo_url:
+            return ("{{ '{}': '{}', '{}': '{}', '{}': '{}', {}: {}, {}: {} }}".format('public_Id', self.public_Id, 'fullname', self.fullname, 'professionalHeadline', self.professionalHeadline, 'skills', self.skills, 'photo_url', self.photo_url))
+        else:
+            return(
+                    "{{ '{}': '{}', '{}': '{}', '{}': '{}', {}: {} }}"
+                    .format('public_Id', self.public_Id, 'fullname',
+                            self.fullname, 'professionalHeadline', 
+                            self.professionalHeadline, 
+                            'skills', self.skills))
+    
     def update(self, *args, **kwargs):
         """
         Updates the Instatiation with a dictionary
