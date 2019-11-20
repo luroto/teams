@@ -23,8 +23,8 @@ def index():
 
 @app.route('/people/<username>', strict_slashes=False)
 def searchingforsomeone(username):
-    """ 
-    This module gets info for a fiven username
+    """
+    This module gets info for a given username
     """
     usuario = UserData()
     to_update = userDataSkills(public_Id=username)
@@ -36,7 +36,7 @@ def searchingforsomeone(username):
 @app.route('/people/<username>/connections', strict_slashes=False)
 def lookingforconnections(username):
     """
-    This module gets all about connections
+    This module gets all about connections of a given user
     """
     returning = []
     queries = dict(request.args.items())
@@ -52,8 +52,12 @@ def lookingforconnections(username):
     respuesta = json.dumps(returning, ensure_ascii=False)
     return Response(respuesta, mimetype='application/json')
 
+
 @app.route('/people/<username>/buildateam')
 def building_teams(username):
+    """
+    This file creates a team given some parameters from the URL route
+    """
     queries = dict(request.args.items())
     correct_path = request.args.get('skill')
     if correct_path is None:
@@ -69,13 +73,6 @@ def building_teams(username):
         queries['listofcandidates'] = candidates
         candidateswithskills = GettingSkillsforCandidates(**queries)
         return candidateswithskills
-
-
-
-
-
-
-
 
 
 
