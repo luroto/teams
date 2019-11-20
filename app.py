@@ -34,26 +34,52 @@ def searchingforsomeone(username):
 
 
 @app.route('/people/<username>/connections', strict_slashes=False)
-def lookingforconnections(username, path=None):
+def lookingforconnections(username):
     """
     This module gets all about connections
     """
     returning = []
     queries = dict(request.args.items())
-    if 'skill' in request.args:
+    if 'degree' in request.args is True:
+        queries['degree'] = request.args.get('degree')
+    queries['public_Id'] = username
+    candidates = ConnectingUser(**queries)
+    if type(candidates) is dict:
+        candidates = json.dumps(candidates)
+        return Response(candidates, mimetype='application/json')
+    for candidate in candidates:
+        returning.append(userDataSkills(public_Id=candidate))
+    respuesta = json.dumps(returning, ensure_ascii=False)
+    return Response(respuesta, mimetype='application/json')
+
+@app.route('/people/<username>/buildateam')
+def building_teams(username):
+    queries = dict(request.args.items())
+    correct_path = request.args.get('skill')
+    if correct_path is None:
+        message = {'message': 'You must pass at least one skill on the route'}
+        message = json.dumps(message, ensure_ascii=False)
+        return Response(message, mimetype='application/json')
+    else:
         skills = list(request.args.getlist('skill'))
         queries.pop('skill')
         queries['skills'] = skills
-    queries['public_Id'] = username
-    candidates = ConnectingUser(**queries) 
-    if 'skills' in queries:
+        queries['public_Id'] = username
+        candidates = ConnectingUser(**queries)
         queries['listofcandidates'] = candidates
-        return ("ratoncito")
-    else:
-        for candidate in candidates:
-            returning.append(userDataSkills(public_Id=candidate))
-        respuesta = json.dumps(returning, ensure_ascii=False)
-        return Response(respuesta, mimetype='application/json')
+        candidateswithskills = GettingSkillsforCandidates(**queries)
+        return candidateswithskills
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000', debug=True)

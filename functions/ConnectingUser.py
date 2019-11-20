@@ -24,8 +24,16 @@ def ConnectingUser(*args, **kwargs):
         user_connections = requests.get(urlforconnections)
     except user_connections.RequestException as errorcillo:
         return (errorcillo)
-    if user_connections.status_code >= 200 and user_connections.status_code <= 400:
+    if 200 <= user_connections.status_code <= 400:
         user_connections = user_connections.json()
-        for candidate in user_connections:
-            listofcandidates.append(candidate['person']['publicId'])
-    return listofcandidates
+        if 'degree' in kwargs is True:
+            for candidate in user_connections:
+                if candidate['degrees'] == int(kwargs['degree']):
+                    listofcandidates.append(candidate['person']['publicId'])
+            return listofcandidates
+        else:
+            for candidate in user_connections:
+                listofcandidates.append(candidate['person']['publicId'])
+            return listofcandidates
+    else:
+        return {'message': 'Username doesnt exist in Torre'}
