@@ -32,9 +32,12 @@ def userDataSkills(**dictionary):
         skills = []
         for strength in user_data['strengths']:
             skills.append({'skill_name': strength['name'],
-                        'skill_code': strength['code'],
-                        'weight': strength['weight']})
-        dictio = {'public_Id': public_Id, 'fullname': fullname, 'professionalHeadline': professionalHeadline, 'skills': skills}
+                          'skill_code': strength['code'],
+                           'weight': strength['weight']})
+        dictio = {'public_Id': public_Id,
+                  'fullname': fullname,
+                  'professionalHeadline': professionalHeadline,
+                  'skills': skills}
         if photo_url != "":
             dictio['photo_url'] = photo_url
         return (dictio)

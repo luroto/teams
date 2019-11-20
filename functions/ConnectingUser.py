@@ -26,7 +26,7 @@ def ConnectingUser(*args, **kwargs):
         return (errorcillo)
     if 200 <= user_connections.status_code <= 400:
         user_connections = user_connections.json()
-        if 'degree' in kwargs is True:
+        if 'degree' in kwargs:
             for candidate in user_connections:
                 if candidate['degrees'] == int(kwargs['degree']):
                     listofcandidates.append(candidate['person']['publicId'])
