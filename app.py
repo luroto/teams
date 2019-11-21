@@ -65,11 +65,8 @@ def building_teams(username):
     else:
         skills = list(request.args.getlist('skill'))
         queries.pop('skill')
-        print('antes de ver degree')
-        print(queries)
         queries['skills'] = skills
         queries['public_Id'] = username
-        print(queries)
         candidates = ConnectingUser(**queries)
         queries['listofcandidates'] = candidates
         candidateswithskills = GettingSkillsforCandidates(**queries)

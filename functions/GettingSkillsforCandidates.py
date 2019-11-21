@@ -9,8 +9,7 @@ def GettingSkillsforCandidates(*args, **kwargs):
 
     """
     listofcandidates = kwargs['listofcandidates']
-    final_candidate_list = []
-    final_list = []
+    final_dictio = {} 
     username = kwargs['public_Id']
     listofskills = kwargs['skills']
     candidatesforchecking = []
@@ -28,5 +27,7 @@ def GettingSkillsforCandidates(*args, **kwargs):
             for checking in candidate['skills']:
                 if checking['skill_name'] == skill:
                     gettingweight.append(checking['weight'])
-        
-    return (final_list)
+        maxbyskill = max(gettingweight)
+        final_dictio[skill] = skillsandcandidates[skill][gettingweight.index(maxbyskill)]
+    print(final_dictio)
+    return (final_dictio)
