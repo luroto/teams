@@ -27,7 +27,10 @@ def GettingSkillsforCandidates(*args, **kwargs):
             for checking in candidate['skills']:
                 if checking['skill_name'] == skill:
                     gettingweight.append(checking['weight'])
+        if len(gettingweight) == 0:
+            return {'message': 'No matches with the skills provided'}
         maxbyskill = max(gettingweight)
-        final_dictio[skill] = skillsandcandidates[skill][gettingweight.index(maxbyskill)]
-    print(final_dictio)
+        position = gettingweight.index(maxbyskill)
+        final_dictio[skill] = skillsandcandidates[skill][position]
+        gettingweight.clear()
     return (final_dictio)
