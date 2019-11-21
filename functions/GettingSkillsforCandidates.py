@@ -14,6 +14,7 @@ def GettingSkillsforCandidates(*args, **kwargs):
     username = kwargs['public_Id']
     listofskills = kwargs['skills']
     candidatesforchecking = []
+    gettingweight = []
     skillsandcandidates = {}
     for skill in listofskills:
         skillsandcandidates[skill] = []
@@ -23,5 +24,9 @@ def GettingSkillsforCandidates(*args, **kwargs):
         for candidate_data in candidatesforchecking:
             if any(d['skill_name'] == skill for d in candidate_data['skills']):
                 skillsandcandidates[skill].append(candidate_data)
-    print (skillsandcandidates)
+        for candidate in skillsandcandidates[skill]:
+            for checking in candidate['skills']:
+                if checking['skill_name'] == skill:
+                    gettingweight.append(checking['weight'])
+        
     return (final_list)

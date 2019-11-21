@@ -40,8 +40,6 @@ def lookingforconnections(username):
     """
     returning = []
     queries = dict(request.args.items())
-    if 'degree' in request.args is True:
-        queries['degree'] = request.args.get('degree')
     queries['public_Id'] = username
     candidates = ConnectingUser(**queries)
     if type(candidates) is dict:
@@ -59,23 +57,23 @@ def building_teams(username):
     This file creates a team given some parameters from the URL route
     """
     queries = dict(request.args.items())
-    correct_path = request.args.get('skill')
-    if correct_path is None:
+    request.args.get('skill')
+    if request.args.get('skill') is None:
         message = {'message': 'You must pass at least one skill on the route'}
         message = json.dumps(message, ensure_ascii=False)
         return Response(message, mimetype='application/json')
     else:
         skills = list(request.args.getlist('skill'))
         queries.pop('skill')
+        print('antes de ver degree')
+        print(queries)
         queries['skills'] = skills
         queries['public_Id'] = username
+        print(queries)
         candidates = ConnectingUser(**queries)
         queries['listofcandidates'] = candidates
         candidateswithskills = GettingSkillsforCandidates(**queries)
         return candidateswithskills
-
-
-
 
 
 if __name__ == '__main__':
