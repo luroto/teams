@@ -8,7 +8,7 @@ const gettingdata = function () {
 
     axios({
         method:'GET',
-        url: 'http://0.0.0.0:5000/api/v1/people/'.concat(username),
+        url: 'https://wwww.eltiempo.com',
         }).then(res=> {
             data = res.data
             console.log(res)
