@@ -1,0 +1,6 @@
+November 23th, 2019.
+
+It's saturday and the sun will arise soon. Given the lack of access to internet since some hours before, I decide to feed this log instead.
+
+I started to work on this ocassionally since last week. After that, I worked in a previous version of this API until I understad that my API structure required to be redesigned to fit with this test requirements. The API was sucessfully redesigned but I'm working with the js content for the scripts to the templates.
+At the moment the most difficult part was design the routes and its algorithm.

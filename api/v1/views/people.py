@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from api.v1.views import app_views
-from flask import Response, request
+from flask import Response, request, make_response
 import requests
 import json
 from functions import userDataSkills
@@ -19,7 +19,9 @@ def searchingforsomeone(username):
     to_update = userDataSkills(public_Id=username)
     usuario.update(**to_update)
     usuario = json.dumps(str(usuario), ensure_ascii=False)
-    return Response(usuario, mimetype='application/json')
+    r = Response(response=usuario, status=200, mimetype="application/json")
+    r.headers['Access-Control-Allow-Origin'] = '*'
+    return r
 
 @app_views.route('/people/<username>/connections', strict_slashes=False)
 def lookingforconnections(username):
