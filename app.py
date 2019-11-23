@@ -2,13 +2,9 @@
 """
 Sets a Flask web application
 """
-from flask import Flask, request, Response
-from functions.userDataSkills import userDataSkills
-from functions.ConnectingUser import ConnectingUser
-from functions.GettingSkillsforCandidates import GettingSkillsforCandidates
+from flask import Flask, url_for, render_template
 import json
-from models.UserData import UserData
-
+import uuid
 
 app = Flask(__name__)
 
@@ -18,37 +14,22 @@ def index():
     """
     Returns the index page
     """
-    return 'Hi there! The index route is working!'
+    return render_template('index.html', cache_id=str(uuid.uuid4()))
 
 
-@app.route('/people/<username>', strict_slashes=False)
-def searchingforsomeone(username):
+@app.route('/people', strict_slashes=False)
+def searchingforsomeone():
     """
-    This module gets info for a given username
+    This route loads the info for a given username
     """
-    usuario = UserData()
-    to_update = userDataSkills(public_Id=username)
-    usuario.update(**to_update)
-    usuario = json.dumps(str(usuario), ensure_ascii=False)
-    return (Response(usuario, mimetype='application/json'))
+    return render_template('getUser.html', cache_id=str(uuid.uuid4()))
 
-
-@app.route('/people/<username>/connections', strict_slashes=False)
-def lookingforconnections(username):
+@app.route('/people/connections', strict_slashes=False)
+def lookingforconnections():
     """
     This module gets all about connections of a given user
     """
-    returning = []
-    queries = dict(request.args.items())
-    queries['public_Id'] = username
-    candidates = ConnectingUser(**queries)
-    if type(candidates) is dict:
-        candidates = json.dumps(candidates)
-        return Response(candidates, mimetype='application/json')
-    for candidate in candidates:
-        returning.append(userDataSkills(public_Id=candidate))
-    respuesta = json.dumps(returning, ensure_ascii=False)
-    return Response(respuesta, mimetype='application/json')
+    return render_template('candidatesforskills.html', cache_id=str(uuid.uuid4()))
 
 
 @app.route('/people/<username>/buildateam')
@@ -56,22 +37,7 @@ def building_teams(username):
     """
     This file creates a team given some parameters from the URL route
     """
-    queries = dict(request.args.items())
-    request.args.get('skill')
-    if request.args.get('skill') is None:
-        message = {'message': 'You must pass at least one skill on the route'}
-        message = json.dumps(message, ensure_ascii=False)
-        return Response(message, mimetype='application/json')
-    else:
-        skills = list(request.args.getlist('skill'))
-        queries.pop('skill')
-        queries['skills'] = skills
-        queries['public_Id'] = username
-        candidates = ConnectingUser(**queries)
-        queries['listofcandidates'] = candidates
-        candidateswithskills = GettingSkillsforCandidates(**queries)
-        return candidateswithskills
-
+    return render_template('candidatesforskills.html', cache_id=str(uuid.uuid4()))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000', debug=True)
+    app.run(host='0.0.0.0', port='5001', debug=True)

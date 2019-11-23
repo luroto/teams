@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>People on detail</title>
+<script type="text/javascript" src="/static/scripts/getUser.js?{{ cache_id}}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/searching.css') }}?{{cache_id}}">
+</head>
+<body>
+    <div id="instructions">
+        <h3 id="title">Get an user's info </h3>
+        <p id="texto">Usage: Enter a public Id of someone on Torre's database.</p>
+    </div>
+    <div id="searching">
+        <form id="formulario">
+            <fieldset>
+                    <label htmlFor='username'> Username </label>
+                    <input type='textarea' id='username'/>
+                    <button id="search">Search</button>
+            </fieldset>  
+        </form>
+    </div>
+    <div id="main_container">
+    </div>
+</body>
+</html>
