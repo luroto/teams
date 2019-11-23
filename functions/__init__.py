@@ -1,3 +1,3 @@
-from .userDataSkills import userDataSkills
-from .ConnectingUser import ConnectingUser
-from .GettingSkillsforCandidates import GettingSkillsforCandidates
+from functions.ConnectingUser import ConnectingUser
+from functions.GettingSkillsforCandidates import GettingSkillsforCandidates
+from functions.userDataSkills import userDataSkills

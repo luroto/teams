@@ -7,15 +7,18 @@ from models.UserTeam import UserTeam
 from .userDataSkills import userDataSkills
 from flask import jsonify
 
+
 def ConnectingUser(*args, **kwargs):
     """
     This function handles with the user candidates for the team
     """
     public_Id = kwargs['public_Id']
-    urlforconnections = ('https://bio.torre.co/api/people/{}/connections'.format(public_Id))
+    urlforconnections = ('https://bio.torre.co/api/people/{}/connections'
+                         .format(public_Id))
     listofcandidates = []
     if 'q'in kwargs and 'limit' in kwargs:
-        urlforconnections += '?' + "q=" + kwargs.get("q") + "&" + "limit=" + kwargs.get("limit")
+        urlforconnections += '?' + "q=" + kwargs.get(
+                            "q") + "&" + "limit=" + kwargs.get("limit")
     elif "q" in kwargs:
         urlforconnections += '?' + "q=" + kwargs.get("q")
     elif "limit" in kwargs:

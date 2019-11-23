@@ -3,13 +3,15 @@
 This function handles when user searchs a skills in connections
 """
 from .userDataSkills import userDataSkills
+
+
 def GettingSkillsforCandidates(*args, **kwargs):
     """
     This function handles the candidates and their skills
 
     """
     listofcandidates = kwargs['listofcandidates']
-    final_dictio = {} 
+    final_dictio = {}
     username = kwargs['public_Id']
     listofskills = kwargs['skills']
     candidatesforchecking = []

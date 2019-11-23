@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>People on detail</title>
-<script type="text/javascript" src="/static/scripts/getUser.js?{{ cache_id}}"></script>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/searching.css') }}?{{cache_id}}">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>People on detail</title>
+    <script type="text/javascript" src="/static/scripts/getUser.js?{{ cache_id}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/searching.css') }}?{{cache_id}}">
 </head>
 <body>
     <div id="instructions">
@@ -14,8 +15,8 @@
         <form id="formulario">
             <fieldset>
                     <label htmlFor='username'> Username </label>
-                    <input type='textarea' id='username'/>
-                    <button id="search">Search</button>
+                    <input type='textarea' name="username" id='username' placeholder="public_Id"/><br>
+                    <button type="button" onclick="gettingdata()">Search</button>
             </fieldset>  
         </form>
     </div>
