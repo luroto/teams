@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type=javascript src="static/scripts/candidatesforskills.js?{{ cache_id }}"></script>
+</head>
+<body>
+    <div id="searching">
+        <h4>Building a team </h4>
+        <p>On this section you can build a team given a public_Id on Torre's API.</p>
+        <h5>How it works:</h5>
+        <p>Provide a public_id and a set of skills. After that you will get, for every skill, a candidate from this public_Id connections who has the highest score (weight) on that skill.</p>
+        <form>
+            <fieldset> 
+                    <legend>Username and skills </legend>
+                    <label htmlFor='username'> Username </label>
+                    <input type='textarea' name='username'  />
+                    <fieldset>
+                    <legend> Skills to be searched </legend>
+                    <label htmlFor='python'> Python </label>
+                    <input type='checkbox' name='skills' value=Python  />
+                    <label htmlFor='CSS'> CSS </label>
+                    <input type='checkbox' name='skills 'value='CSS'  />
+                    <label htmlFor='HTML5'> HTML5 </label>
+                    <input type='checkbox' name='skills' value='HTML5'  />
+                    <label htmlFor='Javascript'> Javascript</label>
+                    <input type='checkbox' name='skills' value='Javascript'  />
+                    <label htmlFor='C'> C </label>
+                    <input type='checkbox' name='skills' value='C'  />
+                    <label htmlFor='DevOps'> DevOps </label>
+                    <input type='checkbox' name='skills'value='DevOps'  />
+
+            </fieldset>
+            <fieldset>
+                    <legend> Additional info </legend>
+                    <label htmlFor='queries'> Name </label>
+                    <input type='textarea' name='queries' value='' />
+                    <label htmlFor='limit'> Show me only the first</label>
+                    <input type='textarea' name='queries' value=''  />
+                    <label htmlFor='limit'> results </label>
+                  </fieldset>
+                  <input type='submit' value='Submit' />
+                </fieldset>
+        </form>
+    </div>
+    <div id="main_container">
+        <div>
+            <h1>{{ name }}</h1>
+        </div>
+        <div id="photo">
+            <img src="{{photo_url}}">
+        </div>
+        <div id="skills">
+            <h1> Skill:</h1> <p></p>
+            <p> {{ skill }}</p>
+            <h1>Weight: </h1>
+            <p> {{ weight }}</p>
+        </div>
+    </div>
+</body>
+</html>

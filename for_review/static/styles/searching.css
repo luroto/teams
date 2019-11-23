@@ -1,0 +1,27 @@
+#instructions
+{
+    max-width: 700px;
+    max-height: 350px;
+    background-color: rgb(130, 158, 219);
+    margin: auto;
+    display: row;
+    justify-content: left;
+    align-items: flex-end;
+}
+#searching 
+{
+    max-width: 700px;
+    background-color: rgb(171, 171, 182);
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+#formulario 
+{
+    max-width: 500;
+    background-color: white;
+}
+
+
+}

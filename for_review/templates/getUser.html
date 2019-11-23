@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>People on detail</title>
+    <script type="text/javascript" src="/static/scripts/getUser.js?{{ cache_id}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/searching.css') }}?{{cache_id}}">
+</head>
+<body>
+    <div id="instructions">
+        <h3 id="title">Get an user's info </h3>
+        <p id="texto">Usage: Enter a public Id of someone on Torre's database.</p>
+    </div>
+    <div id="searching">
+        <form id="formulario">
+            <fieldset>
+                    <label htmlFor='username'> Username </label>
+                    <input type='textarea' name="username" id='username' placeholder="public_Id"/><br>
+                    <button type="button" onclick="gettingdata()">Search</button>
+            </fieldset>  
+        </form>
+    </div>
+    <div id="main_container">
+    </div>
+</body>
+</html>
