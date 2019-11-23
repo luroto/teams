@@ -1,5 +1,6 @@
-let data = []
 const gettingdata = function () {
+    let user = []
+    let html = []
     const username = document.getElementById("username").value;
     if (username == ""){
         document.getElementById("username").focus();
@@ -8,14 +9,12 @@ const gettingdata = function () {
 
     axios({
         method:'GET',
-        url: 'https://wwww.eltiempo.com',
+        url: 'https://torre-teams.herokuapp.com/api/v1/people/'.concat(username),
         }).then(res=> {
-            data = res.data
-            console.log(res)
+            user = JSON.parse(res.data)
+            console.log(user)
+            console.log(typeof(user))
+
         }).catch(error => console.log(error.response.data))
-
-        console.log(data)
-        const container = document.getElementById("main_container")
-        container.appendChild("<img src="data.photo_url"> <h4>Name <h4> <p> data.name </p> <h4> Skills </h4> <p> </p>")
-
+        console.log(type(user))
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from api.v1.views import app_views
-from flask import Response, request, make_response
+from flask import request, jsonify
 import requests
 import json
 from functions import userDataSkills
@@ -17,11 +17,14 @@ def searchingforsomeone(username):
     """
     usuario = UserData()
     to_update = userDataSkills(public_Id=username)
+    if type(to_update) is None:
+        message = {'message': 'This username doesnt exist in Torre'}
+        message = json.dumps(message, ensure_ascii=False)
+        return Response(response=message, status=404, mimetype='application/json')
     usuario.update(**to_update)
     usuario = json.dumps(str(usuario), ensure_ascii=False)
-    r = Response(response=usuario, status=200, mimetype="application/json")
-    r.headers['Access-Control-Allow-Origin'] = '*'
-    return r
+    return jsonify(usuario), 200
+
 
 @app_views.route('/people/<username>/connections', strict_slashes=False)
 def lookingforconnections(username):
@@ -39,7 +42,6 @@ def lookingforconnections(username):
         returning.append(userDataSkills(public_Id=candidate))
     respuesta = json.dumps(returning, ensure_ascii=False)
     return Response(respuesta, mimetype='application/json')
-
 
 @app_views.route('/people/<username>/buildateam')
 def building_teams(username):

@@ -42,3 +42,5 @@ def userDataSkills(**dictionary):
         if photo_url != "":
             dictio['photo_url'] = photo_url
         return (dictio)
+    else:
+        return {'message': 'user doesnt exist in Torre'}
