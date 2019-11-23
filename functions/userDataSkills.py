@@ -22,6 +22,7 @@ def userDataSkills(**dictionary):
         user_data.encoding = 'utf-8'
     except user_data.RequestException as errorcillo:
         return(errorcillo)
+    print (user_data.status_code)
     if user_data.status_code >= 200 and user_data.status_code <= 400:
         user_data = user_data.json()
         public_Id = user_data['person']['publicId']
